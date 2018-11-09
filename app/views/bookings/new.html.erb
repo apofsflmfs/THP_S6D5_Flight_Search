@@ -1,2 +1,40 @@
-<h1>Bookings#new</h1>
-<p>Find me in app/views/bookings/new.html.erb</p>
+<h1 class="text-center">Récapitulatif de la réservation</h1>
+<br>
+<table class="table col-md-6 offset-md-3 text-center">
+  <thead>
+    <tr>
+      <th>Numéro du vol</th>
+      <th>Départ</th>
+      <th>Arrivée</th>
+      <th>Date</th>
+      <th>Durée du trajet</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%=@flight.id%></td>
+      <td><%=@flight.departure_airport.airport_code%></td>
+      <td><%=@flight.arrival_airport.airport_code%></td>
+      <td><%=@flight.departure_date.strftime("%e/%-m/%Y")%></td>
+      <td><%=@flight.duration%> minutes</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <%=form_tag(new_booking_url, method: :post) do %>
+      <input type="hidden" name="booking[pass_nbr]" value=<%=@pass_nbr%> >
+      <input type="hidden" name="booking[flight_id]" value=<%=@flight.id%> >
+      <%@pass_nbr.times do |n|%>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Passager n°<%=n+1%></label>
+            <%= text_field_tag "passenger[name_#{n+1}]".to_sym, nil, placeholder: "Nom du passager" ,class: "form-control"%>
+          </div>
+        </div>
+      <%end%>
+      <%= submit_tag 'Enregistrer les passagers', class: 'btn btn-outline-success col-md-4 offset-md-4' %>
+    <%end%>
+  </div>
+</div>

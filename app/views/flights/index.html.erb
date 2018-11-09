@@ -1,10 +1,3 @@
-<div class="center text-center bg-secondary text-light py-3"   >
-<!-- #emoji from https://www.emojicopy.com/ -->
-    <h1>🛩 FlightSearcher.com 🛩</h1>
-    <h3>Prêt à planer?</h3>
-</div>
-<br>
-
 <div class="row">
 
   <div class="col-md-4 offset-md-4">
@@ -67,8 +60,9 @@
       </tr>
     </thead>
     <tbody>
-      <%= form_for Booking.new do |f|%>
-         <%= f.submit 'Booker le vol', class: 'btn btn-outline-success col-md-4 offset-md-4' %>
+      <%= form_for Booking.new, url: bookings_path do |f|%>
+      <input type="hidden" name="booking[pass_nbr]" value=<%=@pass_nbr%> >
+        <%= f.submit 'Booker le vol', class: 'btn btn-outline-success col-md-4 offset-md-4' %>
         <% @flights.each do |flight| %>
           <tr>
             <td>

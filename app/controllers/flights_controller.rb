@@ -4,6 +4,7 @@ class FlightsController < ApplicationController
       dep = params[:search][:departure_id]
       arr = params[:search][:arrival_id]
       dat = params[:search][:date]
+      @pass_nbr = params[:search][:pass_nbr]
       @flights = Flight.where(departure_airport_id: dep, arrival_airport_id: arr, departure_date: (dat.to_date.midnight..dat.to_date.midnight+1.day))
       unless @flights.count >0
         @flights = "empty"

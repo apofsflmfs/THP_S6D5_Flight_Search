@@ -1,2 +1,44 @@
-<h1>Bookings#show</h1>
-<p>Find me in app/views/bookings/show.html.erb</p>
+<h1 class="text-center">Votre vol</h1>
+<br>
+
+<table class="table col-md-6 offset-md-3 text-center">
+  <thead>
+    <tr>
+      <th>Numéro du vol</th>
+      <th>Départ</th>
+      <th>Arrivée</th>
+      <th>Date</th>
+      <th>Durée du trajet</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%=@flight.id%></td>
+      <td><%=@flight.departure_airport.airport_code%></td>
+      <td><%=@flight.arrival_airport.airport_code%></td>
+      <td><%=@flight.departure_date.strftime("%e/%-m/%Y")%></td>
+      <td><%=@flight.duration%> minutes</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+<h1 class="text-center">Vos passagers</h1>
+<br>
+
+<table class="table col-md-6 offset-md-3 text-center">
+  <thead>
+    <tr>
+      <th>Numéro</th>
+      <th>Nom</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%@passengers.each_with_index do |passenger,ind|%>
+      <tr>
+        <td><%=ind+1%></td>
+        <td><%=passenger.name%></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
