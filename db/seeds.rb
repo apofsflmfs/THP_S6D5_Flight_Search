@@ -11,6 +11,6 @@ codes.each do |code|
   Airport.create(airport_code: code)
 end
 
-100.times do |n|
+1000.times do |n|
   Flight.create(duration: rand(100..1000), departure_date: time_rand, departure_airport_id: rand(Airport.first.id..Airport.last.id), arrival_airport_id: rand(Airport.first.id..Airport.last.id))
 end
