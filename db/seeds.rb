@@ -2,7 +2,7 @@ Airport.all.destroy_all
 Flight.all.destroy_all
 
 def time_rand(from = 0.0, to = Time.now)
-  Time.at(from + rand * (to.to_f - from.to_f))
+  Time.at(Time.now + rand(1..(7*24*60*60)))
 end
 
 codes = ["ORY", "AMS", "LHR", "SIN", "CGK", "DXB", "MAD", "GIG", "CDG", "SFO"]
