@@ -1,0 +1,22 @@
+<h1>Liste des vols</h1>
+
+<table class="table col-md-6 text-center">
+  <thead>
+    <tr>
+      <th>Numéro du vol</th>
+      <th>Départ</th>
+      <th>Arrivée</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @flights.each do |flight|%>
+      <tr>
+        <td><%=flight.id%></td>
+        <td><%=flight.departure_airport.airport_code%></td>
+        <td><%=flight.arrival_airport.airport_code%></td>
+        <td><%=flight.departure_date%></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>

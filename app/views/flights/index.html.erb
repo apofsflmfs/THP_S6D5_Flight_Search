@@ -1,30 +1,36 @@
-<div class="center jumbotron text-center">
+<div class="center text-center bg-secondary text-light py-3"   >
 <!-- #emoji from https://www.emojicopy.com/ -->
-    <h1>🛩 FlightSearcher.com 🛩</h1><br>
+    <h1>🛩 FlightSearcher.com 🛩</h1>
     <h3>Prêt à planer?</h3>
 </div>
+<br>
 
 <div class="row">
+
   <div class="col-md-4 offset-md-4">
-    <h3>Chercher un vol ✈</h3>
+
+    <h3 class="text-center">Chercher un vol ✈</h3><br>
     <%= form_tag(root_path, method: :get) do %>
+
       <div class="row">
+
         <div class="col-md-6">
           <div class="form-group">
             <label>Date de départ ⌚</label>
             <%= date_field_tag "search[date]", '2018-11-08', class: "form-control" %>
           </div>
         </div>
+
         <div class="col-md-6">
           <div class="form-group">
             <label>Nombre de passagers </label>
             <%= select_tag "search[pass_nbr]", options_for_select((1..10)), class: "form-control col-md-4 offset-md-3" %>
           </div>
-        </div>
+        </div>        
       </div>
 
-
       <div class="row">
+
         <div class="col-md-6">
           <div class="form-group">
             <label>Aéroport de départ 🛫</label>
@@ -39,29 +45,41 @@
           </div>
         </div>
       </div>
-      <%= submit_tag 'Search', class: "btn btn-outline-primary" %>
+
+      <%= submit_tag 'Chercher', class: "btn btn-outline-primary col-md-12" %>
     <% end %>
   </div>
 </div>
-
 <br>
+<hr>
 <% if @flights == "empty"%>
   <h4 class="text-center">😢 Yo la recherche n'a rien donné 🤯</h4>
 <% elsif @flights%>
-  <h4 class="px-5">Voici les <%=@flights.count%> résultats de vols entre <strong><%=@flights.first.departure_airport.airport_code%></strong> et <strong><%=@flights.first.arrival_airport.airport_code%></strong> le <strong><%=@flights.first.departure_date.strftime("%e/%-m/%Y")%></strong></h4>
-  <div class="row">
-    <% @flights.each do |flight| %>
-      <div class="card col-lg-3" >
-        <div class="card-body">
-          <div style="diplay: flex">
-            <h5 class="card-title"> 
-              <strong> 👩‍✈️Numéro de vol : <%= flight.id %>  👨‍✈️</strong>
-            </h5>
-          </div>
-          <p class="card-text" > <strong>Durée</strong>: <%=flight.duration%> minutes </p>
-        </div>
-      </div>
-    <% end %>
-  </div>
+  <h4 class="px-5 text-center"><strong><%=@flights.count%></strong> résultats de vols entre <strong><%=@flights.first.departure_airport.airport_code%></strong> et <strong><%=@flights.first.arrival_airport.airport_code%></strong> le <strong><%=@flights.first.departure_date.strftime("%e/%-m/%Y")%></strong></h4>
+  
+  <br>
+  <table class="table col-md-4 offset-md-4 text-center">
+    <thead>
+      <tr>
+        <th>Votre choix</th>
+        <th>Numéro du vol</th>
+        <th>Durée</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= form_for Booking.new do |f|%>
+         <%= f.submit 'Booker le vol', class: 'btn btn-outline-success col-md-4 offset-md-4' %>
+        <% @flights.each do |flight| %>
+          <tr>
+            <td>
+              <%= f.radio_button :flight_id, flight.id %> 
+            </td>
+            <td><%= flight.id %></td>
+            <td><%=flight.duration%> minutes</td>
+          </tr>
+        <%end%>
+      <%end%>
+    </tbody>
+  </table>
 <%end%>
 
