@@ -15,7 +15,7 @@ class BookingsController < ApplicationController
       new_pass = Passenger.create(name: pass_name)
       @booking.passengers << new_pass
     end
-    flash[:success] = "Votre réservation a été effectuée avec succès!"
+    flash[:success] = "Votre réservation a été effectuée avec succès! 🚀"
     redirect_to booking_path(@booking.id)
   end
 
