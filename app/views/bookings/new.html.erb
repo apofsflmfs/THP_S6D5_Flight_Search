@@ -28,7 +28,7 @@
       <%@pass_nbr.times do |n|%>
         <div class="col-md-6">
           <div class="form-group">
-            <label>Passager n°<%=n+1%></label>
+            <label>👨👩 Passager n°<%=n+1%></label>
             <%= text_field_tag "passenger[name_#{n+1}]".to_sym, nil, placeholder: "Nom du passager" ,class: "form-control"%>
           </div>
         </div>
