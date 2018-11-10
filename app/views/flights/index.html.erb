@@ -60,7 +60,7 @@
       </tr>
     </thead>
     <tbody>
-      <%= form_for Booking.new, url: bookings_path do |f|%>
+      <%= form_for Booking.new, url: new_booking_path, method: :get do |f|%>
       <input type="hidden" name="booking[pass_nbr]" value=<%=@pass_nbr%> >
         <%= f.submit 'Booker le vol', class: 'btn btn-outline-success col-md-4 offset-md-4' %>
         <% @flights.each do |flight| %>

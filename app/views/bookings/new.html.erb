@@ -23,8 +23,7 @@
 
 <div class="row">
   <div class="col-md-6 offset-md-3">
-    <%=form_tag(new_booking_url, method: :post) do %>
-      <input type="hidden" name="booking[pass_nbr]" value=<%=@pass_nbr%> >
+    <%=form_tag(bookings_url, method: :post) do %>
       <input type="hidden" name="booking[flight_id]" value=<%=@flight.id%> >
       <%@pass_nbr.times do |n|%>
         <div class="col-md-6">

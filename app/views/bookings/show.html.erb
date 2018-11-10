@@ -1,44 +1,55 @@
-<h1 class="text-center">Votre vol</h1>
+<h1 class="text-center">Réservation n°<%=@booking.id%></h1>
 <br>
 
-<table class="table col-md-6 offset-md-3 text-center">
-  <thead>
-    <tr>
-      <th>Numéro du vol</th>
-      <th>Départ</th>
-      <th>Arrivée</th>
-      <th>Date</th>
-      <th>Durée du trajet</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%=@flight.id%></td>
-      <td><%=@flight.departure_airport.airport_code%></td>
-      <td><%=@flight.arrival_airport.airport_code%></td>
-      <td><%=@flight.departure_date.strftime("%e/%-m/%Y")%></td>
-      <td><%=@flight.duration%> minutes</td>
-    </tr>
-  </tbody>
-</table>
-<br>
+<div class="row">
+  <div class="col-md-6">
+    <h3 class="text-center">Votre vol</h3>
 
-<h1 class="text-center">Vos passagers</h1>
-<br>
+    <table class="table text-center">
+      <thead>
+        <tr>
+          <th>Numéro du vol</th>
+          <th>Départ</th>
+          <th>Arrivée</th>
+          <th>Date</th>
+          <th>Durée du trajet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%=@flight.id%></td>
+          <td><%=@flight.departure_airport.airport_code%></td>
+          <td><%=@flight.arrival_airport.airport_code%></td>
+          <td><%=@flight.departure_date.strftime("%e/%-m/%Y")%></td>
+          <td><%=@flight.duration%> minutes</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </div>
 
-<table class="table col-md-6 offset-md-3 text-center">
-  <thead>
-    <tr>
-      <th>Numéro</th>
-      <th>Nom</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%@passengers.each_with_index do |passenger,ind|%>
-      <tr>
-        <td><%=ind+1%></td>
-        <td><%=passenger.name%></td>
-      </tr>
-    <%end%>
-  </tbody>
-</table>
+  <div class="col-md-6">
+    <h3 class="text-center">Vos passagers</h3>
+
+    <table class="table text-center col-md-8 offset-md-2">
+      <thead>
+        <tr>
+          <th>Numéro</th>
+          <th>Nom</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%@passengers.each_with_index do |passenger,ind|%>
+          <tr>
+            <td><%=ind+1%></td>
+            <td><%=passenger.name%></td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <%=link_to "Retour à l'accueil", root_path, class: "text-center"%>
+</div>
